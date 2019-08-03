@@ -27,6 +27,7 @@ public abstract class ActorData
     private string abilityBumperAnimation;
     private string abilityNeutralAnimation;
     private string jumpAnimation;
+    private string jumpAnimation2;
     private string deathAnimation;
     private string idleAnimation;
 
@@ -71,6 +72,7 @@ public abstract class ActorData
     public string AbilityBumperAnimation { get => abilityBumperAnimation; set => abilityBumperAnimation = value; }
     public string AbilityNeutralAnimation { get => abilityNeutralAnimation; set => abilityNeutralAnimation = value; }
     public string JumpAnimation { get => jumpAnimation; set => jumpAnimation = value; }
+    public string JumpAnimation2 { get => jumpAnimation2; set => jumpAnimation2 = value; }
     public string DeathAnimation { get => deathAnimation; set => deathAnimation = value; }
     public string IdleAnimation { get => idleAnimation; set => idleAnimation = value; }
     public AudioClip AttackSound1 { get => attackSound1; set => attackSound1 = value; }

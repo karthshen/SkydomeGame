@@ -12,8 +12,8 @@ public abstract class AActor : MonoBehaviour
     private const float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
 
     private bool bIsGrounded = false;
-    private Vector3 frontDirection = new Vector3(0, 90, 0);
-    private Vector3 backDirection = new Vector3(0, 270, 0);
+    protected Vector3 frontDirection = new Vector3(0, 90, 0);
+    protected Vector3 backDirection = new Vector3(0, 270, 0);
 
     //Protected Attributes
     protected ActorState state;

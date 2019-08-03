@@ -20,8 +20,7 @@ public class ActorMovingState : ActorStandingState
     }
 
     protected override void PlayAnimation(AActor actor)
-    {
-        /*
+    {  
         if (Mathf.Abs(actor.MoveHorizontal) < 0.6f)
         {
             actor.GetAnimatorController().SetInt(actor.ActorData.WalkAnimation);
@@ -30,6 +29,5 @@ public class ActorMovingState : ActorStandingState
         {
             actor.GetAnimatorController().SetInt(actor.ActorData.RunningAnimation);
         }
-        */
     }
 }

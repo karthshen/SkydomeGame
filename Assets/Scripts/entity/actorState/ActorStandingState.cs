@@ -40,7 +40,7 @@ public class ActorStandingState : ActorState
 
     protected override void PlayAnimation(AActor actor)
     {
-        //actor.GetAnimatorController().SetInt(actor.ActorData.IdleAnimation);
+        actor.GetAnimatorController().SetInt(actor.ActorData.IdleAnimation);
     }
 
     private void ActorStandingInitialize(AActor actor)

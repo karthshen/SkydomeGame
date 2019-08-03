@@ -25,7 +25,13 @@ public class ArcherData : ActorData
         AbilityBumperAnimation = "animation,23";
         AbilityNeutralAnimation = "animation,32";
 
+        WalkAnimation = "animation,17";
+        RunningAnimation = "animation,20";
+
+        JumpAnimation = "animation,16";
+        JumpAnimation2 = "animation,4";
+
         DeathAnimation = "animation,10";
         IdleAnimation = "animation,13";
-}
+    }
 }
