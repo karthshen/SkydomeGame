@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ArcherData : ActorData
+public class TrollData : ActorData
 {
-    public ArcherData()
+    public TrollData()
     {
         MaxHealth = 100;
         MaxEnergy = 100;

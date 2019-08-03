@@ -14,6 +14,8 @@ public class ActorFreezeState : ActorState
         this.time = time;
         this.attacker = attacker;
         HandleInput(actor, null);
+
+        //Debug.Log(actor.name + " In freezing state");
     }
 
     public ActorFreezeState(float time, AActor actor, AActor attacker, float knockingForce)

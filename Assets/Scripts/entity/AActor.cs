@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using InControl;
+using System;
 
-public abstract class AActor : MonoBehaviour
+public abstract class AActor : AEntity
 {
     // Constants
     public const float ATTACK_TIMER_INTERVAL = 0.5f;
     public float AIR_ATTACK_LENGTH = 0.35f / 1.3f;
     public const float CAST_DURATION = 0.5f;
-    private const float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
+    protected float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
+    public const float ATTACK_TIMER_BETWEEN_COMBO = 0.7f;
+    public const float ATTACK_TIMER = ATTACK_TIMER_BETWEEN_COMBO / 1.3f;
+    public float ATTACK_INTERVAL = 0.35f / 1.3f;
+    public const float RESPAWN_TIMER = 3.0f;
+    public const float AIRBORNE_DRAG = 15.0f;
+    public const float DAMAGE_TO_ENERGY_CONSTANT = 20f;
 
     private bool bIsGrounded = false;
     protected Vector3 frontDirection = new Vector3(0, 90, 0);
@@ -34,7 +41,13 @@ public abstract class AActor : MonoBehaviour
 
     private ActorData actorData;
 
+    private System.Guid attackCode = Guid.NewGuid();
+    private System.Guid damageCode = Guid.NewGuid();
+
+    //Timer
+    private float attackTimer = 0f;
     private float freezeTimer = 0f;
+    private float deathTimer = 0f;
     //Abilities
 
     //Timer
@@ -47,6 +60,9 @@ public abstract class AActor : MonoBehaviour
     public int JumpNum { get => jumpNum; set => jumpNum = value; }
     public float FreezeTimer { get => freezeTimer; set => freezeTimer = value; }
     public ActorData ActorData { get => actorData; set => actorData = value; }
+    public Guid AttackCode { get => attackCode; set => attackCode = value; }
+    public float AttackTimer { get => attackTimer; set => attackTimer = value; }
+    public float DeathTimer { get => deathTimer; set => deathTimer = value; }
 
     //Functionalities
     protected void InitializeActor()
@@ -90,14 +106,26 @@ public abstract class AActor : MonoBehaviour
     public virtual void Death()
     {
         //Set state to death state
-
-        //Respawn for Player
+        Debug.Log(this.name + " is killed.");
+        state = new ActorDeathState();
+        ((ActorState)state).PlayStateAnimation(this);
+        DeathTimer = 2f;
     }
+
+    protected abstract void AfterDeath();
 
     public virtual float TakeDamage(float damage, AActor attacker)
     {
         if (state.GetType() == typeof(ActorDeathState))
             return 0;
+
+        if (attacker.AttackCode.Equals(damageCode))
+        {
+            return 0;
+        }
+
+        this.CurrentHealth -= damage;
+        damageCode = attacker.AttackCode;
 
         if (CurrentHealth <= 0.001)
         {
@@ -110,6 +138,8 @@ public abstract class AActor : MonoBehaviour
             if (state.GetType() != typeof(ActorDeathState))
                 state = new ActorFreezeState(FREEZEING_TIME_DEFAULT, this, attacker);
         }
+
+        Debug.Log(this.name + " took " + damage + " amount of damage" + " current health: " + currentHealth);
 
         return CurrentHealth;
     }
@@ -208,6 +238,35 @@ public abstract class AActor : MonoBehaviour
                 freezeTimer = 0;
                 BackToStanding();
             }
+        }
+
+        if (AttackTimer > 0)
+        {
+            AttackTimer -= Time.deltaTime;
+
+            if (AttackTimer < AIR_ATTACK_LENGTH)
+            {
+                GetRigidbody().drag = 0;
+            }
+
+            if (AttackTimer <= 0 && (state.GetType() == typeof(ActorAttackState)))
+            {
+                //Back to standing after each attack
+                //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
+                BackToStanding();
+                AttackTimer = ATTACK_TIMER_BETWEEN_COMBO - ATTACK_INTERVAL;
+            }
+        }
+
+        if (deathTimer > 0)
+        {
+            deathTimer -= Time.deltaTime;
+            if (deathTimer <= 0) // && CanRespawn
+            {
+                AfterDeath();
+            }
+
+            return;
         }
     }
 

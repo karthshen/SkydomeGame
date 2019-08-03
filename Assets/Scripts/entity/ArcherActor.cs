@@ -4,9 +4,8 @@ using System.Collections;
 public class ArcherActor : AActor
 {
     ActorState defaultState;
-    string actorName = "Archer";
 
-    //public ArcherBow bow;
+    public ArcherBow archerBow;
 
     public ArcherActor() : base()
     {
@@ -27,12 +26,21 @@ public class ArcherActor : AActor
 
         BIsGrounded = true;
 
+        if (archerBow)
+        {
+            archerBow.ItemPickup(this);
+        }
+
         InitializeActor();
     }
 
     public override void Attack()
     {
-        throw new System.NotImplementedException();
+        AttackCode = System.Guid.NewGuid();
+        //Debug.Log("AttackCode: " + actor.AttackCode);
+        AttackTimer = AActor.ATTACK_TIMER;
+
+        archerBow.UseItem(this);
     }
 
     public override void Death()
@@ -54,5 +62,10 @@ public class ArcherActor : AActor
     private void Update()
     {
         base.ActorUpdate();
+    }
+
+    protected override void AfterDeath()
+    {
+        throw new System.NotImplementedException();
     }
 }

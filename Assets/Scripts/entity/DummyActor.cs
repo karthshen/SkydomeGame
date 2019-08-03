@@ -39,4 +39,9 @@ public class DummyActor : AActor
             (player.transform.position.x + diffX, player.transform.position.y + diffY, player.transform.position.z + diffZ);
 
     }
+
+    protected override void AfterDeath()
+    {
+        throw new System.NotImplementedException();
+    }
 }

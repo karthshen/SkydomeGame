@@ -198,7 +198,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4000013930652492}
   - component: {fileID: 95000010707907906}
-  - component: {fileID: 64000013607218730}
+  - component: {fileID: 7147826003140520496}
+  - component: {fileID: 6858988865774789240}
+  - component: {fileID: 7745634482765835635}
+  - component: {fileID: 2767322670841330328}
   m_Layer: 0
   m_Name: TrollGiant
   m_TagString: Untagged
@@ -242,20 +245,66 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!64 &64000013607218730
-MeshCollider:
+--- !u!65 &7147826003140520496
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1000010759127040}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.8479004, z: 0.5908387}
+  m_Center: {x: 0, y: 0.9169159, z: 0.0073944926}
+--- !u!54 &6858988865774789240
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010759127040}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &7745634482765835635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010759127040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e583b556736e12240a23fe3cf7ad0c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AIR_ATTACK_LENGTH: 0.26923078
+  currentHealth: 0
+  currentEnergy: 0
+  moveHorizontal: 0
+  jumpForceFactor: 91
+--- !u!114 &2767322670841330328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000010759127040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ff002b4fd48646af8b9fba229a68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animators:
+  - {fileID: 95000010707907906}
 --- !u!1 &1000010801686436
 GameObject:
   m_ObjectHideFlags: 0

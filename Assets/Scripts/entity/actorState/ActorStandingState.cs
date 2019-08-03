@@ -29,6 +29,13 @@ public class ActorStandingState : ActorState
             state.PlayStateAnimation(actor);
             return state;
         }
+        else if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
+        {
+            //Debug.Log(actor.GetName() + " attacking from standing state");
+            ActorState state = new ActorAttackState();
+            //state.HandleInput(actor, inputDevice);
+            return state;
+        }
 
         if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))
         {
