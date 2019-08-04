@@ -29,7 +29,7 @@ public class ActorStandingState : ActorState
             state.PlayStateAnimation(actor);
             return state;
         }
-        else if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
+        else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
             //Debug.Log(actor.GetName() + " attacking from standing state");
             ActorState state = new ActorAttackState();

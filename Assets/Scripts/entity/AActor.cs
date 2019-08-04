@@ -13,7 +13,7 @@ public abstract class AActor : AEntity
     protected float FREEZEING_TIME_DEFAULT = 1.0f / 1000f * 85f;
     public const float ATTACK_TIMER_BETWEEN_COMBO = 0.7f;
     public const float ATTACK_TIMER = ATTACK_TIMER_BETWEEN_COMBO / 1.3f;
-    public float ATTACK_INTERVAL = 0.35f / 1.3f;
+    public const float ATTACK_INTERVAL = 0.35f / 1.3f;
     public const float RESPAWN_TIMER = 3.0f;
     public const float AIRBORNE_DRAG = 15.0f;
     public const float DAMAGE_TO_ENERGY_CONSTANT = 20f;
@@ -21,6 +21,8 @@ public abstract class AActor : AEntity
     private bool bIsGrounded = false;
     protected Vector3 frontDirection = new Vector3(0, 90, 0);
     protected Vector3 backDirection = new Vector3(0, 270, 0);
+
+    protected float attackTimerMagicNumber = ATTACK_TIMER_BETWEEN_COMBO - ATTACK_INTERVAL;
 
     //Protected Attributes
     protected ActorState state;
@@ -116,7 +118,7 @@ public abstract class AActor : AEntity
 
     public virtual float TakeDamage(float damage, AActor attacker)
     {
-        if (state.GetType() == typeof(ActorDeathState))
+        if (state.GetType() == typeof(ActorDeathState) || state.GetType() == typeof(ActorFreezeState))
             return 0;
 
         if (attacker.AttackCode.Equals(damageCode))
@@ -249,12 +251,12 @@ public abstract class AActor : AEntity
                 GetRigidbody().drag = 0;
             }
 
-            if (AttackTimer <= 0 && (state.GetType() == typeof(ActorAttackState)))
+            if (AttackTimer <= 0 && (state.GetType() == typeof(ActorAttackState) || state.GetType() == typeof(EnemyAttackState)))
             {
                 //Back to standing after each attack
                 //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
                 BackToStanding();
-                AttackTimer = ATTACK_TIMER_BETWEEN_COMBO - ATTACK_INTERVAL;
+                AttackTimer = attackTimerMagicNumber;
             }
         }
 

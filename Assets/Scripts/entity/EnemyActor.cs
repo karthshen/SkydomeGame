@@ -5,9 +5,18 @@ public abstract class EnemyActor : AActor
 {
     protected bool engagedCombat = false;
     protected CameraController skydomeCamera;
+    private AActor player;
+    public const float ATTACK_RANGE = 3f;
+
+    public AActor Player { get => player; set => player = value; }
 
     public bool IsEngagedInCombat()
     {
         return engagedCombat;
+    }
+
+    public bool IsAttackInRange()
+    {
+        return Vector3.Distance(player.transform.position, this.transform.position) < EnemyActor.ATTACK_RANGE;
     }
 }

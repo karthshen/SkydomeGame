@@ -6,7 +6,7 @@ public class ActorAttackState : ActorState
 {
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        if (inputDevice.Action2 && actor.AttackTimer < actor.ATTACK_INTERVAL)
+        if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
         {
             PlayAnimation(actor);
             //Debug.Log("Attack Timer for " + actor.GetName() + " is " + actor.AttackTimer);

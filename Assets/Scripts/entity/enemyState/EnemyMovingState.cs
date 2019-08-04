@@ -7,11 +7,12 @@ public class EnemyMovingState : ActorState
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
         AActor player = GameObject.FindGameObjectWithTag("Player").GetComponent<AActor>();
+        EnemyActor thisActor = (EnemyActor)actor;
 
-        if(Vector3.Distance(player.transform.position, actor.transform.position) < 3)
+        if(thisActor.IsAttackInRange())
         {
             //Attack
-            return new EnemyStandingState();
+            return new EnemyAttackState();
         }
         else
         {
