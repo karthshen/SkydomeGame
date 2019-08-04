@@ -30,6 +30,38 @@ public class ActorJumpState : ActorState
                 return this;
             }
         }
+        else if (inputDevice.Action2 && actor.AttackTimer < AActor.ATTACK_INTERVAL)
+        {
+            //Debug.Log(actor.GetName() + " attacking from standing state");
+            ActorState state = new ActorAttackState();
+            //state.HandleInput(actor, inputDevice);
+            actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
+            return state;
+        }
+        //Ability Up input
+        else if (inputDevice.Action4.WasPressed)
+        {
+            if (actor.CurrentEnergy >= actor.abilityUp.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                actor.abilityUp.AbilityExecute();
+                actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
+                return new ActorAbilityUpState();
+            }
+        }
+        //Ability Trigger Input
+        else if ((inputDevice.RightTrigger) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))
+        {
+            if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
+            {
+                actor.MoveHorizontal = inputDevice.LeftStickX.Value;
+                actor.MoveVertical = inputDevice.LeftStickY.Value;
+                actor.CastTimer = AActor.CAST_DURATION;
+                actor.abilityTrigger.AbilityExecute();
+                //actor.GetRigidbody().drag = AActor.AIRBORNE_DRAG;
+                return new ActorAbilityTriggerState();
+            }
+        }
 
         return this;
     }
