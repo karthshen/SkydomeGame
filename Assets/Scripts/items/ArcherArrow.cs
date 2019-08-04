@@ -90,6 +90,14 @@ public class ArcherArrow : ProjectileItem
 
     public override void ProjectileFinish()
     {
+        GameObject fireblast = Object.Instantiate(Resources.Load("ArcherBurst")) as GameObject;
+
+        FireBurst blast = fireblast.GetComponent<FireBurst>();
+
+        blast.ItemPickup(Owner);
+
+        blast.transform.position = com.transform.position;
+
         RemoveItem();
     }
 

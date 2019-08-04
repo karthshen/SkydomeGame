@@ -45,6 +45,18 @@ public class ActorStandingState : ActorState
                 actor.abilityUp.AbilityExecute();
                 return new ActorAbilityUpState();
             }
+        }        
+        //Ability Trigger Input
+        else if ((inputDevice.RightTrigger) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))
+        {
+            if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
+            {
+                actor.MoveHorizontal = inputDevice.LeftStickX.Value;
+                actor.MoveVertical = inputDevice.LeftStickY.Value;
+                actor.CastTimer = AActor.CAST_DURATION;
+                actor.abilityTrigger.AbilityExecute();
+                return new ActorAbilityTriggerState();
+            }
         }
 
         if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))

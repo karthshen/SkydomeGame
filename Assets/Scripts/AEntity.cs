@@ -63,4 +63,9 @@ public abstract class AEntity : MonoBehaviour
             }
         }
     }
+
+    public void SetPositionToEnitty(AEntity entity)
+    {
+        gameObject.transform.position = entity.transform.position;
+    }
 }

@@ -112,7 +112,7 @@ public class CameraController : MonoBehaviour
 
         if (actors.Count <= 0)//early out if no actors have been found
             return;
-        desiredPos = Vector3.zero;
+        desiredPos = new Vector3(0, 3, 0);
         float distance = 0f;
         var mHeight = maxY - minY;
         var mWidth = maxX - minX;

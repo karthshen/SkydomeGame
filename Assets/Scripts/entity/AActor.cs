@@ -36,6 +36,8 @@ public abstract class AActor : AEntity
     [SerializeField]
     private float moveHorizontal;
     [SerializeField]
+    private float moveVertical;
+    [SerializeField]
     private float jumpForceFactor = 91f;
 
     private int jumpNum = 0;
@@ -71,6 +73,7 @@ public abstract class AActor : AEntity
     public float DeathTimer { get => deathTimer; set => deathTimer = value; }
     public float CastTimer { get => castTimer; set => castTimer = value; }
     public bool AbilityCastedInAir { get => abilityCastedInAir; set => abilityCastedInAir = value; }
+    public float MoveVertical { get => moveVertical; set => moveVertical = value; }
 
     //Functionalities
     protected void InitializeActor()

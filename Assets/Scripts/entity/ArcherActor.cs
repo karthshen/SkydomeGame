@@ -32,6 +32,7 @@ public class ArcherActor : AActor
         BIsGrounded = true;
 
         abilityUp = new ArcherBurstShot(this);
+        abilityTrigger = new ArcherShootClawhook(this);
 
         if (archerBow)
         {
