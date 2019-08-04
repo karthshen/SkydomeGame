@@ -36,6 +36,16 @@ public class ActorStandingState : ActorState
             //state.HandleInput(actor, inputDevice);
             return state;
         }
+        //Ability Up input
+        else if (inputDevice.Action4.WasPressed)
+        {
+            if (actor.CurrentEnergy >= actor.abilityUp.AbilityCost)
+            {
+                actor.CastTimer = AActor.CAST_DURATION;
+                actor.abilityUp.AbilityExecute();
+                return new ActorAbilityUpState();
+            }
+        }
 
         if (inputDevice.LeftStickX.Value != 0 && GetType() != typeof(ActorMovingState))
         {

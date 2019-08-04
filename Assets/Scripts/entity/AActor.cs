@@ -21,7 +21,6 @@ public abstract class AActor : AEntity
     private bool bIsGrounded = false;
     protected Vector3 frontDirection = new Vector3(0, 90, 0);
     protected Vector3 backDirection = new Vector3(0, 270, 0);
-
     protected float attackTimerMagicNumber = ATTACK_TIMER_BETWEEN_COMBO - ATTACK_INTERVAL;
 
     //Protected Attributes
@@ -50,8 +49,13 @@ public abstract class AActor : AEntity
     private float attackTimer = 0f;
     private float freezeTimer = 0f;
     private float deathTimer = 0f;
+    private float castTimer = 0f;
     //Abilities
+    public Ability abilityUp;
+    public Ability abilityLeft;
+    public Ability abilityTrigger;
 
+    private bool abilityCastedInAir = false;
     //Timer
 
     public float CurrentHealth { get => currentHealth; set => currentHealth = value; }
@@ -65,6 +69,8 @@ public abstract class AActor : AEntity
     public Guid AttackCode { get => attackCode; set => attackCode = value; }
     public float AttackTimer { get => attackTimer; set => attackTimer = value; }
     public float DeathTimer { get => deathTimer; set => deathTimer = value; }
+    public float CastTimer { get => castTimer; set => castTimer = value; }
+    public bool AbilityCastedInAir { get => abilityCastedInAir; set => abilityCastedInAir = value; }
 
     //Functionalities
     protected void InitializeActor()
@@ -257,6 +263,17 @@ public abstract class AActor : AEntity
                 //Debug.Log("Attack Timer for " + GetName() + " is " + AttackTimer);
                 BackToStanding();
                 AttackTimer = attackTimerMagicNumber;
+            }
+        }
+
+        if (CastTimer > 0)
+        {
+            CastTimer -= Time.deltaTime;
+            if (CastTimer <= 0)
+            {
+                if (GetRigidbody().drag != 0)
+                    GetRigidbody().drag = 0;
+                BackToStanding();
             }
         }
 

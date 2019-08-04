@@ -7,6 +7,11 @@ public class ArcherActor : AActor
 
     public ArcherBow archerBow;
 
+    [SerializeField]
+    private float energyRegenSpeed = 5f;
+    [SerializeField]
+    private float attackEnergyCost = 10f;
+
     public ArcherActor() : base()
     {
 
@@ -26,6 +31,8 @@ public class ArcherActor : AActor
 
         BIsGrounded = true;
 
+        abilityUp = new ArcherBurstShot(this);
+
         if (archerBow)
         {
             archerBow.ItemPickup(this);
@@ -36,11 +43,16 @@ public class ArcherActor : AActor
 
     public override void Attack()
     {
-        AttackCode = System.Guid.NewGuid();
-        //Debug.Log("AttackCode: " + actor.AttackCode);
-        AttackTimer = AActor.ATTACK_TIMER;
+        if (CurrentEnergy >= attackEnergyCost)
+        {
+            CurrentEnergy -= attackEnergyCost;
 
-        archerBow.UseItem(this);
+            AttackCode = System.Guid.NewGuid();
+            //Debug.Log("AttackCode: " + actor.AttackCode);
+            AttackTimer = AActor.ATTACK_TIMER;
+
+            archerBow.UseItem(this);
+        }
     }
 
     public override void Death()
@@ -62,6 +74,11 @@ public class ArcherActor : AActor
     private void Update()
     {
         base.ActorUpdate();
+
+        if(CurrentEnergy<=100)
+        {
+            CurrentEnergy += energyRegenSpeed * Time.deltaTime;
+        }
     }
 
     protected override void AfterDeath()
