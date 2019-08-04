@@ -11024,6 +11024,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CAMERA_SIZE_FACTOR: 1.5
+  DEFAULT_CAMERA_DISTANCE: 7
+  COMBAT_CAMERA_DISTANCE: 4
   actors:
   - {fileID: 1309714371554396691}
   - {fileID: 1566411940}

@@ -7,7 +7,7 @@ public class TrollData : ActorData
     {
         MaxHealth = 100;
         MaxEnergy = 100;
-        MoveVelocity = 7;
+        MoveVelocity = 3;
         JumpVelocity = 5;
         SprintVelocity = 100;
         AttackPower = 15;

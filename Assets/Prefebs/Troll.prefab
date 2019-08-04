@@ -9,6 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6072346274480876144}
+  - component: {fileID: 5369874353300705379}
+  - component: {fileID: 7332655487258530933}
+  - component: {fileID: 3962974048100122635}
+  - component: {fileID: 2498525146578657782}
   m_Layer: 0
   m_Name: Troll
   m_TagString: Untagged
@@ -31,6 +35,67 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5369874353300705379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072346274480876151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e583b556736e12240a23fe3cf7ad0c59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AIR_ATTACK_LENGTH: 0.26923078
+  ATTACK_INTERVAL: 0.26923078
+  currentHealth: 0
+  currentEnergy: 0
+  moveHorizontal: 0
+  jumpForceFactor: 91
+--- !u!114 &7332655487258530933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072346274480876151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ff002b4fd48646af8b9fba229a68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animators:
+  - {fileID: 6130750127230962181}
+--- !u!65 &3962974048100122635
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072346274480876151}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.7206747, y: 1.8479004, z: 1.0311307}
+  m_Center: {x: 0, y: 0.9169159, z: 0.0073944926}
+--- !u!54 &2498525146578657782
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6072346274480876151}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 120
+  m_CollisionDetection: 0
 --- !u!1001 &6072346274549432135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91,11 +156,21 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 120
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7745634482765835635, guid: 134568deae123e7488798bf153729a7a, type: 3}
+    - {fileID: 2767322670841330328, guid: 134568deae123e7488798bf153729a7a, type: 3}
+    - {fileID: 7147826003140520496, guid: 134568deae123e7488798bf153729a7a, type: 3}
+    - {fileID: 6858988865774789240, guid: 134568deae123e7488798bf153729a7a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 134568deae123e7488798bf153729a7a, type: 3}
 --- !u!4 &6074084029844528139 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013930652492, guid: 134568deae123e7488798bf153729a7a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6072346274549432135}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6130750127230962181 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95000010707907906, guid: 134568deae123e7488798bf153729a7a,
     type: 3}
   m_PrefabInstance: {fileID: 6072346274549432135}
   m_PrefabAsset: {fileID: 0}

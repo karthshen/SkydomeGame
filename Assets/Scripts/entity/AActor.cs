@@ -206,7 +206,7 @@ public abstract class AActor : AEntity
         return ac;
     }
 
-    private void TurnAround()
+    protected void TurnAround()
     {
         if (moveHorizontal > 0)
         {

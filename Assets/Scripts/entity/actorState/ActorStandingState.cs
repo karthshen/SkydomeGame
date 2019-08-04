@@ -50,7 +50,7 @@ public class ActorStandingState : ActorState
         actor.GetAnimatorController().SetInt(actor.ActorData.IdleAnimation);
     }
 
-    private void ActorStandingInitialize(AActor actor)
+    protected void ActorStandingInitialize(AActor actor)
     {
         if (actor.GetRigidbody().useGravity == false)
         {

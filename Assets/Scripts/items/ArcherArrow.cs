@@ -84,7 +84,7 @@ public class ArcherArrow : ProjectileItem
         float yDirectionInRadian = GetYDirectionInRadian();
 
         gameObject.transform.position = new Vector3(Owner.transform.position.x + moveHorizontal * Mathf.Sin(yDirectionInRadian),
-            Owner.transform.position.y + yModifier + Owner.transform.lossyScale.y / 2, Owner.transform.position.z);
+            Owner.transform.position.y + yModifier + Owner.transform.lossyScale.y / 2, Owner.transform.position.z - 0.01f);
         movement = new Vector3(1 * Mathf.Sin(yDirectionInRadian), 0.0f, 0.0f);
     }
 

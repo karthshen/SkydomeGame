@@ -1,18 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TrollActor : AActor
+public class TrollActor : EnemyActor
 {
     private ActorState defaultState;
     private AActor player;
-    private CameraController camera;
-
-    private bool engagedCombat = false;
 
     // Use this for initialization
     void Start()
     {
-        defaultState = new ActorStandingState();
+        defaultState = new EnemyStandingState();
         state = defaultState;
 
         ac = GetComponent<AnimatorController>();
@@ -23,16 +20,48 @@ public class TrollActor : AActor
 
         BIsGrounded = true;
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<AActor>();
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
+        skydomeCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
 
-        if(!player || !camera)
+        if(!player || !skydomeCamera)
         {
             throw new MissingReferenceException();
         }
 
         InitializeActor();
 
-        this.FREEZEING_TIME_DEFAULT = 0.25f;
+        this.FREEZEING_TIME_DEFAULT = 0.50f;
+    }
+
+    //Actor Methods
+
+    public override void Move()
+    {
+        float step = ActorData.MoveVelocity * Time.deltaTime; // calculate distance to move
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, player.transform.position, step);
+
+        if(newPosition.x - transform.position.x > 0)
+        {
+            MoveHorizontal = 1f; //Moving to right
+        }
+        else
+        {
+            MoveHorizontal = -1f; //Moving to left
+        }
+
+        TurnAround();
+
+        transform.position = new Vector3(newPosition.x, newPosition.y, transform.position.z);
+
+        //base.Move();
+    }
+
+    protected override void BackToStanding()
+    {
+        if (state.GetType() != typeof(ActorDeathState))
+        {
+            state = new EnemyStandingState();
+            ((ActorState)(state)).PlayStateAnimation(this);
+        }
     }
 
     // Update is called once per frame
@@ -47,7 +76,7 @@ public class TrollActor : AActor
 
         if(state != null)
         {
-            state.HandleInput(this, new InControl.InputDevice());
+            state = state.HandleInput(this, new InControl.InputDevice());
         }
     }
 
@@ -63,7 +92,7 @@ public class TrollActor : AActor
 
     private void EngageCombat()
     {
-        camera.ActorSpottedInCamera(this);
+        skydomeCamera.ActorSpottedInCamera(this);
         engagedCombat = true;
     }
 
@@ -74,7 +103,7 @@ public class TrollActor : AActor
 
     protected override void AfterDeath()
     {
-        camera.actors.Remove(this);
+        skydomeCamera.actors.Remove(this);
         Destroy(gameObject);
     }
 }
