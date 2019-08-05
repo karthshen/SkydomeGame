@@ -28,6 +28,7 @@ public abstract class AActor : AEntity
 
     protected Rigidbody rb;
     protected AnimatorController ac;
+    private AudioSource effectSource;
     //Private Attributes
     [SerializeField]
     private float currentHealth;
@@ -74,6 +75,7 @@ public abstract class AActor : AEntity
     public float CastTimer { get => castTimer; set => castTimer = value; }
     public bool AbilityCastedInAir { get => abilityCastedInAir; set => abilityCastedInAir = value; }
     public float MoveVertical { get => moveVertical; set => moveVertical = value; }
+    public AudioSource EffectSource { get => effectSource; set => effectSource = value; }
 
     //Functionalities
     protected void InitializeActor()
@@ -300,5 +302,10 @@ public abstract class AActor : AEntity
             BackToStanding();
             //Debug.Log("Entering StandingState from Ground");
         }
+    }
+
+    public AudioSource GetAudioSource()
+    {
+        return EffectSource;
     }
 }

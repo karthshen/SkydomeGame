@@ -10,8 +10,8 @@ public class EnemyAttackState : ActorAttackState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        PlayAnimation(actor);
         actor.Attack();
+        PlayAnimation(actor);
 
         EnemyActor thisActor = (EnemyActor)actor;
 

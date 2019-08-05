@@ -70,6 +70,7 @@ public class ActorStandingState : ActorState
     protected override void PlayAnimation(AActor actor)
     {
         actor.GetAnimatorController().SetInt(actor.ActorData.IdleAnimation);
+        SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.ActorData.IdleSound, ref hasSoundPlayed);
     }
 
     protected void ActorStandingInitialize(AActor actor)

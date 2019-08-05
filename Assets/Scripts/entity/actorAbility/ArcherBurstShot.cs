@@ -4,7 +4,7 @@ using System.Collections;
 public class ArcherBurstShot : Ability
 {
     private const float BURST_FORCE = 1f;
-    private const float BURST_SPEED = 600f;
+    private const float BURST_SPEED = 450f;
     private const float BURST_SPEED_AIR = BURST_SPEED / 1.3f;
 
     public ArcherBurstShot(AActor caster)
@@ -35,7 +35,7 @@ public class ArcherBurstShot : Ability
 
         //AudioSource audioSource = caster.GetAudioSource();
 
-        //SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.arrow_attack2, ref hasPlayed, 0.5f);
+        SoundManager.instance.PlayEffectWithAudioSource(caster.GetAudioSource(), SoundManager.instance.arrow_attack2, ref hasPlayed, 0.5f);
 
         base.AbilityExecute();
     }

@@ -36,16 +36,16 @@ public abstract class ActorData
     private AudioClip attackSound2;
     private AudioClip attackSound3;
     private AudioClip movingSound;
-    private AudioClip walkingSound;
-    private AudioClip runningSound;
+    private AudioClip walkingSound = SoundManager.instance.footstep;
+    private AudioClip runningSound = SoundManager.instance.footstep;
     private AudioClip damagedSound;
     private AudioClip abilityDownSound;
     private AudioClip abilityUpSound;
     private AudioClip abilityHorizSound;
     private AudioClip abilityNeutralSound;
     private AudioClip abilityTriggerSound;
-    private AudioClip jumpSound;
-    private AudioClip landSound;
+    private AudioClip jumpSound = SoundManager.instance.jump;
+    private AudioClip landSound = SoundManager.instance.land;
     private AudioClip deathSound;
     private AudioClip idleSound;
 

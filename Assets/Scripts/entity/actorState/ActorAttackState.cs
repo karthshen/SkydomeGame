@@ -19,5 +19,6 @@ public class ActorAttackState : ActorState
     protected override void PlayAnimation(AActor actor)
     {
         actor.GetAnimatorController().SetInt(actor.ActorData.AttackAnimation1);
+        SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.ActorData.AttackSound1, ref hasSoundPlayed);
     }
 }

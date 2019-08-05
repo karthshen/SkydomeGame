@@ -33,6 +33,8 @@ public class TrollActor : EnemyActor
             weapon.ItemPickup(this);
         }
 
+        EffectSource = GetComponent<AudioSource>();
+
         InitializeActor();
 
         this.FREEZEING_TIME_DEFAULT = 0.50f;
@@ -94,7 +96,7 @@ public class TrollActor : EnemyActor
 
         if(state != null)
         {
-            state = state.HandleInput(this, new InControl.InputDevice());
+            state = state.HandleInput(this, null);
         }
     }
 

@@ -112,7 +112,7 @@ public class ArcherArrow : ProjectileItem
                 Owner.AttackCode = System.Guid.NewGuid();
             }
             hitActor.TakeDamage(Owner.ActorData.AttackPower / 1.5f * DamageModifier, Owner);
-            //SoundManager.instance.PlayEffectWithAudioSource(hitActor.GetAudioSource(), SoundManager.instance.arrowHit, ref hasPlayed, 0.6f);
+            SoundManager.instance.PlayEffectWithAudioSource(hitActor.GetAudioSource(), SoundManager.instance.arrowHit, ref hasPlayed, 0.4f);
             attacked = true;
 
             ProjectileFinish();

@@ -77,14 +77,17 @@ public class ActorJumpState : ActorState
         if (JumpNum == 1)
         {
             actor.GetAnimatorController().SetInt(actor.ActorData.JumpAnimation);
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.ActorData.JumpSound, ref hasSoundPlayed);
         }
         else if (JumpNum == 0)
         {
             actor.GetAnimatorController().SetInt(actor.ActorData.JumpAnimation2);
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.ActorData.JumpSound, ref hasSoundPlayed);
          }
         else
         {
             actor.GetAnimatorController().SetInt(actor.ActorData.JumpAnimation);
+            SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.ActorData.JumpSound, ref hasSoundPlayed);
         }
     }
 }

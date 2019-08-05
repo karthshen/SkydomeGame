@@ -212,7 +212,7 @@ public class ArcherClawHook : ProjectileItem
         if (clawhookState == ClawhookState.RetractingActor || clawhookState == ClawhookState.RetractingOthers)
         {
             //animator.SetInteger("animation", 2);
-            //SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.hookback, ref hasPlayed);
+            SoundManager.instance.PlayEffectWithAudioSource(audioSource, SoundManager.instance.hookback, ref hasPlayed, 0.5f);
         }
         else
         {

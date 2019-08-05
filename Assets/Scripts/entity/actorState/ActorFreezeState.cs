@@ -44,5 +44,6 @@ public class ActorFreezeState : ActorState
     protected override void PlayAnimation(AActor actor)
     {
         actor.GetAnimatorController().SetInt(actor.ActorData.FreezeAnimation);
+        SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.ActorData.DamagedSound, ref hasSoundPlayed, 0.45f);
     }
 }

@@ -35,5 +35,16 @@ public class ArcherData : ActorData
 
         DeathAnimation = "animation,10";
         IdleAnimation = "animation,13";
+
+        //sound
+        AttackSound1 = SoundManager.instance.arrow_attack1;
+        AttackSound2 = SoundManager.instance.arrow_attack2;
+        AttackSound3 = SoundManager.instance.arrow_attack2;
+
+        AbilityNeutralSound = SoundManager.instance.chicken1;
+        AbilityHorizSound = SoundManager.instance.trap;
+        AbilityDownSound = SoundManager.instance.arrow_attack2;
+        AbilityTriggerSound = SoundManager.instance.hookshoot;
+        AbilityUpSound = SoundManager.instance.arrow_attack2;
     }
 }

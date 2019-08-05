@@ -18,5 +18,7 @@ public class ActorDeathState : ActorState
     protected override void PlayAnimation(AActor actor)
     {
         actor.GetAnimatorController().SetInt(actor.ActorData.DeathAnimation);
+        SoundManager.instance.PlayEffectWithAudioSource(actor.GetAudioSource(), actor.ActorData.DeathSound, ref hasSoundPlayed);
+
     }
 }

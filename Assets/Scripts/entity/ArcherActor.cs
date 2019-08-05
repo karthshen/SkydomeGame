@@ -39,6 +39,10 @@ public class ArcherActor : AActor
             archerBow.ItemPickup(this);
         }
 
+        EffectSource = GetComponent<AudioSource>();
+
+        SoundManager.instance.PlayMusic(SoundManager.instance.battle01);
+
         InitializeActor();
     }
 

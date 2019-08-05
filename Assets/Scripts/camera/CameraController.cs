@@ -47,6 +47,8 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    public float COMBAT_CAMERA_DISTANCE1 { get => COMBAT_CAMERA_DISTANCE; set => COMBAT_CAMERA_DISTANCE = value; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -98,7 +100,7 @@ public class CameraController : MonoBehaviour
         actors.RemoveAt(1);
         actors.Add(actor);
 
-        CONSTANT_CLOSE = COMBAT_CAMERA_DISTANCE;
+        CONSTANT_CLOSE = COMBAT_CAMERA_DISTANCE1;
     } 
 
     private void MoveCamera()
