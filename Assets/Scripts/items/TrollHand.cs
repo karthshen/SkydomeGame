@@ -6,7 +6,7 @@ public class TrollHand : Item
     public override void ItemPickup(AActor actor)
     {
         IgnoreOwnerCollision(Owner);
-        GetComponent<Collider>().enabled = false;
+        GetComponent<Collider>().enabled = true;
         base.ItemPickup(actor);
     }
 

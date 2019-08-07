@@ -15,6 +15,13 @@ public abstract class EnemyActor : AActor
         return engagedCombat;
     }
 
+    public void ResetEnemy()
+    {
+        skydomeCamera.actors.Remove(this);
+        InitializeActor();
+        engagedCombat = false;
+    }
+
     public bool IsAttackInRange()
     {
         return Vector3.Distance(player.transform.position, this.transform.position) < ATTACK_RANGE;

@@ -5,12 +5,12 @@ public class BullBossData : ActorData
 {
     public BullBossData()
     {
-        MaxHealth = 100;
+        MaxHealth = 200;
         MaxEnergy = 100;
-        MoveVelocity = 4f;
+        MoveVelocity = 4.1f;
         JumpVelocity = 5;
         SprintVelocity = 100;
-        AttackPower = 15;
+        AttackPower = 25;
         DefensePower = 15;
 
         //animation

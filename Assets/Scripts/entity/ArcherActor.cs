@@ -7,6 +7,8 @@ public class ArcherActor : AActor
 
     public ArcherBow archerBow;
 
+    public SavePointStar savePoint;
+
     [SerializeField]
     private float energyRegenSpeed = 5f;
     [SerializeField]
@@ -46,6 +48,13 @@ public class ArcherActor : AActor
         InitializeActor();
     }
 
+    protected override void InitializeActor()
+    {
+        base.InitializeActor();
+        state = new ActorStandingState();
+        state.PlayStateAnimation(this);
+    }
+
     public override void Attack()
     {
         if (CurrentEnergy >= attackEnergyCost)
@@ -67,6 +76,15 @@ public class ArcherActor : AActor
     public override void Death()
     {
         base.Death();
+    }
+
+    public override void Respawn()
+    {
+        if(savePoint)
+        {
+            InitializeActor();
+            transform.position = savePoint.transform.position;
+        }
     }
 
     public override void Jump()
@@ -92,6 +110,13 @@ public class ArcherActor : AActor
 
     protected override void AfterDeath()
     {
-        throw new System.NotImplementedException();
+        savePoint.UseItem(this);
+
+        EnemyActor[] enemies = GameObject.FindObjectsOfType<EnemyActor>();
+
+        foreach(EnemyActor enemy in enemies)
+        {
+            enemy.ResetEnemy();
+        }
     }
 }

@@ -8,6 +8,8 @@ public class BossActor : EnemyActor
 
     private ActorState defaultState;
 
+    public GameObject endofGameSign;
+
     // Use this for initialization
     void Start()
     {
@@ -42,6 +44,8 @@ public class BossActor : EnemyActor
         this.attackTimerMagicNumber = 0f;
 
         ATTACK_RANGE = 4f;
+
+        endofGameSign.GetComponent<SpriteRenderer>().enabled = false;
     }
 
     //Actor Methods
@@ -116,6 +120,11 @@ public class BossActor : EnemyActor
         {
             state = state.HandleInput(this, null);
         }
+
+        if(endofGameSign.GetComponent<SpriteRenderer>().enabled && DeathTimer <=0)
+        {
+            Application.Quit();
+        }
     }
 
     private bool IsPlayerInAggroRange()
@@ -131,9 +140,11 @@ public class BossActor : EnemyActor
     public override void Death()
     {
         base.Death();
-        DeathTimer = 10f;
+        DeathTimer = 6f;
         this.GetComponent<Collider>().enabled = false;
         this.rb.isKinematic = true;
+
+        endofGameSign.GetComponent<SpriteRenderer>().enabled = true;
     }
 
     private void EngageCombat()

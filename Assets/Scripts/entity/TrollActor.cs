@@ -23,12 +23,12 @@ public class TrollActor : EnemyActor
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<AActor>();
         skydomeCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraController>();
 
-        if(!Player || !skydomeCamera)
+        if (!Player || !skydomeCamera)
         {
             throw new MissingReferenceException();
         }
 
-        if(weapon)
+        if (weapon)
         {
             weapon.ItemPickup(this);
         }
@@ -48,7 +48,7 @@ public class TrollActor : EnemyActor
         float step = ActorData.MoveVelocity * Time.deltaTime; // calculate distance to move
         Vector3 newPosition = Vector3.MoveTowards(transform.position, Player.transform.position, step);
 
-        if(newPosition.x - transform.position.x > 0)
+        if (newPosition.x - transform.position.x > 0)
         {
             MoveHorizontal = 1f; //Moving to right
         }
@@ -65,13 +65,11 @@ public class TrollActor : EnemyActor
     }
     public override void Attack()
     {
-        if (AttackTimer <= 0)
-        {
-            AttackCode = System.Guid.NewGuid();
-            //Debug.Log("AttackCode: " + actor.AttackCode);
-            AttackTimer = 1.5f;
-            weapon.UseItem(this);
-        }
+
+        AttackCode = System.Guid.NewGuid();
+        //Debug.Log("AttackCode: " + actor.AttackCode);
+        AttackTimer = 1.0f;
+        weapon.UseItem(this);
     }
 
     protected override void BackToStanding()
@@ -89,14 +87,19 @@ public class TrollActor : EnemyActor
     {
         base.ActorUpdate();
 
-        if(IsPlayerInAggroRange() && !engagedCombat)
+        if (IsPlayerInAggroRange() && !engagedCombat)
         {
             EngageCombat();
         }
 
-        if(state != null)
+        if (state != null)
         {
             state = state.HandleInput(this, null);
+        }
+
+        if (Vector3.Distance(Player.transform.position, this.transform.position) > 40)
+        {
+            ResetEnemy();
         }
     }
 

@@ -10,14 +10,16 @@ public class EnemyAttackState : ActorAttackState
 
     public override ActorState HandleInput(AActor actor, InputDevice inputDevice)
     {
-        actor.Attack();
-        PlayAnimation(actor);
+        if (actor.AttackTimer <= 0)
+        {
+            actor.Attack();
+            PlayAnimation(actor);
 
-        EnemyActor thisActor = (EnemyActor)actor;
+            EnemyActor thisActor = (EnemyActor)actor;
 
-        if (!thisActor.IsAttackInRange())
-            return new EnemyMovingState();
-
+            if (!thisActor.IsAttackInRange())
+                return new EnemyMovingState();
+        }
         return this;
     }
 }

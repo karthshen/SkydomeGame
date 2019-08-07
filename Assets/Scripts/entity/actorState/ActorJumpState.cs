@@ -39,7 +39,7 @@ public class ActorJumpState : ActorState
             return state;
         }
         //Ability Up input
-        else if (inputDevice.Action4.WasPressed)
+        else if (inputDevice.Action4.WasPressed && actor.CastTimer <= 0)
         {
             if (actor.CurrentEnergy >= actor.abilityUp.AbilityCost)
             {
@@ -50,7 +50,7 @@ public class ActorJumpState : ActorState
             }
         }
         //Ability Trigger Input
-        else if ((inputDevice.RightTrigger) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)))
+        else if ((inputDevice.RightTrigger) && (!Mathf.Approximately(inputDevice.LeftStickX.Value, 0) || !Mathf.Approximately(inputDevice.LeftStickY.Value, 0)) && actor.CastTimer <= 0)
         {
             if (actor.CurrentEnergy >= actor.abilityTrigger.AbilityCost)
             {

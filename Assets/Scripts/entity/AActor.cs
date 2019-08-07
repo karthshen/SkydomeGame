@@ -78,7 +78,7 @@ public abstract class AActor : AEntity
     public AudioSource EffectSource { get => effectSource; set => effectSource = value; }
 
     //Functionalities
-    protected void InitializeActor()
+    protected virtual void InitializeActor()
     {
         //TODO: initialize state to standing state
 
@@ -123,6 +123,11 @@ public abstract class AActor : AEntity
         state = new ActorDeathState();
         ((ActorState)state).PlayStateAnimation(this);
         DeathTimer = 2f;
+    }
+
+    public virtual void Respawn()
+    {
+
     }
 
     protected abstract void AfterDeath();
