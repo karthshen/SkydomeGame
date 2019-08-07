@@ -58,6 +58,10 @@ public class ArcherActor : AActor
 
             archerBow.UseItem(this);
         }
+        else
+        {
+            BackToStanding();
+        }
     }
 
     public override void Death()
